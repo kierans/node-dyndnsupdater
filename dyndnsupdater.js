@@ -8,7 +8,7 @@ var extend = require('util')._extend;
 var url = require("url");
 
 var DEFAULT_OPTIONS = {
-  url: "http://[USERNAME]:[PASSWORD]@members.dyndns.org/nic/update?hostname=[HOSTNAME]&myip=[IP]"
+  url: "https://[USERNAME]:[PASSWORD]@members.dyndns.org/nic/update?hostname=[HOSTNAME]&myip=[IP]"
 };
 
 function checkOptions(options) {
