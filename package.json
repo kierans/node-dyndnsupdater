@@ -1,0 +1,26 @@
+{
+  "name": "DynDNSUpdater",
+  "version": "0.0.1",
+  "description": "NodeJS script to update DynDNS with an IP address.",
+  "main": "main.js",
+  "scripts": {
+    "test": "./node_modules/nodeunit/bin/nodeunit test"
+  },
+  "repository": {
+    "type": "hg",
+    "url": "https://bitbucket.org/quasarprogramming/dyndnsupdater"
+  },
+  "keywords": [
+    "dyndns"
+  ],
+  "author": "Kieran Simpson",
+  "license": "Apache2",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "cheerio": "~0.12.3",
+    "node-getopt": "~0.2.3"
+  },
+  "devDependencies": {
+    "nodeunit": "~0.8.2"
+  }
+}
