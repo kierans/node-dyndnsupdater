@@ -1,17 +1,21 @@
 var http = require("http");
-var cheerio = require("cheerio");
 var events = require("events");
 
 var IPAddressFinder = new events.EventEmitter();
 
 IPAddressFinder.getCurrentIPAddress = function() {
+  function logError(e) {
+    console.error("There was problem with requesting you current public IP address: " + e.message);
+  }
+
+  var regexp = /Current IP Address: (\d+\.\d+.\d+.\d+)/;
   var html = "";
 
   var self = this;
 
   console.log("Determining public facing IP ...");
 
-  var request = http.request("http://whatismyipaddress.com", function(response) {
+  var request = http.request("http://checkip.dyndns.org/", function(response) {
     response.on("data", function (chunk) {
       html += chunk;
     });
@@ -19,12 +23,13 @@ IPAddressFinder.getCurrentIPAddress = function() {
     response.on("end", function() {
       //console.log(html);
 
-      var jq = cheerio.load(html);
+      var matches = regexp.exec(html);
+      var ip = matches[1];
 
-      var nodes = jq("#section_left").children();
-      nodes = jq(nodes[2]).text();
-
-      var ip = nodes.trim();
+      if (ip === undefined) {
+        logError(new Error("IP regexp didn't match"));
+        return;
+      }
 
       console.log("Public facing IP is: '" + ip + "'");
 
@@ -33,7 +38,7 @@ IPAddressFinder.getCurrentIPAddress = function() {
   });
 
   request.on("error", function(e) {
-    console.error("There was problem with requesting you current public IP address: " + e.message);
+    logError(e);
   });
 
   request.end();

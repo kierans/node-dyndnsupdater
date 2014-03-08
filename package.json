@@ -17,7 +17,6 @@
   "license": "Apache2",
   "readmeFilename": "README.md",
   "dependencies": {
-    "cheerio": "~0.12.3",
     "node-getopt": "~0.2.3"
   },
   "devDependencies": {
